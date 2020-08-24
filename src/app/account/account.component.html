@@ -6,32 +6,34 @@
         <mat-icon (click)="logout()" [matTooltip]="'Выйти из приложения'" [matTooltipShowDelay]="500">power_settings_new</mat-icon>
     </mat-toolbar>
     <div class="account__inner">
-        <h3>Список пользователей</h3>
-        <form [formGroup]="form">
-            <input type="text" matInput formControlName="searchStr" placeholder="Найти пользователя">
-            <mat-icon (click)="filterUsers()">search</mat-icon>
-        </form>        
+        <div class="account__header">
+            <h3>Список пользователей</h3>
+            <form [formGroup]="form">
+                <input type="text" matInput formControlName="searchStr" placeholder="Найти пользователя">
+                <mat-icon (click)="filterUsers()">search</mat-icon>
+            </form>
+        </div>   
         <table matSort (matSortChange)="sortTable($event)">
             <thead>
                 <tr>
-                    <th mat-sort-header="id">ID</th>
-                    <th mat-sort-header="username">Пользователь</th>
-                    <th mat-sort-header="last_name">Фамилия</th>
-                    <th mat-sort-header="first_name">Имя</th>                    
-                    <th mat-sort-header="is_active">Статус</th>
-                    <th mat-sort-header="is_superuser">Админ</th>
-                    <th mat-sort-header="last_login">Посл.посещение</th>
+                    <th mat-sort-header="id" class="cell cell__num">ID</th>
+                    <th mat-sort-header="username" class="cell cell__username">Пользователь</th>
+                    <th mat-sort-header="last_name" class="cell cell__lastname">Фамилия</th>
+                    <th mat-sort-header="first_name" class="cell cell__name">Имя</th>                    
+                    <th mat-sort-header="is_active" class="cell cell__status">Статус</th>
+                    <th mat-sort-header="is_superuser" class="cell cell__admin">Админ</th>
+                    <th mat-sort-header="last_login" class="cell cell__lastlogin">Посл.посещение</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of filteredData">
-                    <td>{{item.id}}</td>
-                    <td>{{item.username}}</td>
-                    <td>{{item.last_name}}</td>
-                    <td>{{item.first_name}}</td>                    
-                    <td>{{(item.is_active) ? 'Активный' : 'Неактивный'}}</td>
-                    <td>{{(item.is_superuser) ? 'Да' : 'Нет'}}</td>
-                    <td>{{formatDate(item.last_login)}}</td>
+                    <td class="cell cell__num">{{item.id}}</td>
+                    <td class="cell cell__username">{{item.username}}</td>
+                    <td class="cell cell__lastname">{{item.last_name}}</td>
+                    <td class="cell cell__name">{{item.first_name}}</td>                    
+                    <td class="cell cell__status">{{(item.is_active) ? 'Активный' : 'Неактивный'}}</td>
+                    <td class="cell cell__admin">{{(item.is_superuser) ? 'Да' : 'Нет'}}</td>
+                    <td class="cell cell__lastlogin">{{formatDate(item.last_login)}}</td>
                 </tr>
             </tbody>
         </table>
