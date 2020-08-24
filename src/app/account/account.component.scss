@@ -76,7 +76,8 @@ table {
 
     .cell {
         &__username, &__lastname, &__name, &__lastlogin {
-            width: calc((100%-300px) / 4);
+            width: calc((100%-300px)/4);
+            word-break: break-all;
         }
 
         &__status, &__admin {
