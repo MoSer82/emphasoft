@@ -1,0 +1,42 @@
+<div class="account">
+    <mat-toolbar>
+        <div class="username">
+            Вы вошли как {{user.username}}
+        </div>
+        <mat-icon (click)="logout()" [matTooltip]="'Выйти из приложения'" [matTooltipShowDelay]="500">power_settings_new</mat-icon>
+    </mat-toolbar>
+    <div class="account__inner">
+        <h3>Список пользователей</h3>
+        <form [formGroup]="form">
+            <input type="text" matInput formControlName="searchStr" placeholder="Найти пользователя">
+            <mat-icon (click)="filterUsers()">search</mat-icon>
+        </form>        
+        <table matSort (matSortChange)="sortTable($event)">
+            <thead>
+                <tr>
+                    <th mat-sort-header="id">ID</th>
+                    <th mat-sort-header="username">Пользователь</th>
+                    <th mat-sort-header="last_name">Фамилия</th>
+                    <th mat-sort-header="first_name">Имя</th>                    
+                    <th mat-sort-header="is_active">Статус</th>
+                    <th mat-sort-header="is_superuser">Админ</th>
+                    <th mat-sort-header="last_login">Посл.посещение</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of filteredData">
+                    <td>{{item.id}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.last_name}}</td>
+                    <td>{{item.first_name}}</td>                    
+                    <td>{{(item.is_active) ? 'Активный' : 'Неактивный'}}</td>
+                    <td>{{(item.is_superuser) ? 'Да' : 'Нет'}}</td>
+                    <td>{{formatDate(item.last_login)}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator (page)="changePage($event)" [pageSizeOptions]="[10, 25, 50, 100]" [length]="count"
+            [pageSize]="pageSize" [pageIndex]="pageIndex">
+        </mat-paginator>
+    </div>
+</div>
