@@ -16,14 +16,6 @@ export class LoginService {
   ) { }
 
   auth(params, cb: any = false) {
-    return this.http.post(this.apiUrl + 'api-token-auth/', params).subscribe((data: any) => {
-      if (data && data.token) {
-        this.accountService.token = 'Token ' + data.token;
-        this.accountService.username = params.username;
-        if (!!cb) {
-          cb();
-        }
-      }
-    });
+    return this.http.post(this.apiUrl + 'api-token-auth/', params);
   }
 }

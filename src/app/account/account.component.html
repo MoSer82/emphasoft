@@ -9,7 +9,7 @@
         <div class="account__header">
             <h3>Список пользователей</h3>
             <form [formGroup]="form">
-                <input type="text" matInput formControlName="searchStr" placeholder="Найти пользователя">
+                <input type="text" matInput formControlName="searchStr" placeholder="Найти пользователя" (keydown.enter)="filterUsers()">
                 <mat-icon (click)="filterUsers()">search</mat-icon>
             </form>
         </div>   
